@@ -1858,7 +1858,6 @@ public class ControllerHealth
 		) throws ParseException, IOException
 	  
 	  {
-		  
 			String date=req.getParameter("date"); 
 			SimpleDateFormat sd1=new SimpleDateFormat("yyyy-MM-dd");
 			java.util.Date dateUtil=sd1.parse(date);
@@ -1888,11 +1887,9 @@ public class ControllerHealth
 
 			StringBuilder fileNames = new StringBuilder();
 			for (MultipartFile file : paricipantsDeatail) {
-
 				Path fileNameAndPath = Paths.get(abc,file.getOriginalFilename());
 
 				fileNames.append(file.getOriginalFilename() + " ");
-
 				try {
 					
 					Files.write(fileNameAndPath, file.getBytes());
@@ -1903,9 +1900,7 @@ public class ControllerHealth
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
 			}
-
 			String paricipantsDeatailFile = mastertrainer.substring(26);
 			
 		
@@ -1959,50 +1954,40 @@ public class ControllerHealth
 			  
 			traningInformationObject.setParticipant(paricipantsDeatailFile);
 			traningInformationObject.setPhoto(participantdeatailPhoto);
-	
-  
 		  traninigInformationRespositary.save(traningInformationObject);
 	
 		
 		  			
 					      String filePath = mastertrainer;
+					      Path currentPath = Paths.get(System.getProperty("user.dir"));
+					      Path csvFilePath = Paths.get(currentPath.toString(), filePath);
+						  String file= csvFilePath.toString();
 					      String input = null;
 					      //Instantiating the Scanner class
-					      Scanner sc = new Scanner(new File(filePath));
-					      //Instantiating the FileWriter class
-					      FileWriter writer = new FileWriter(mastertrainer);
-					      //Instantiating the Set class
-					      Set set = new HashSet();
-					      while (sc.hasNextLine()) {
-					         input = sc.nextLine();
-					         if(set.add(input)) {
-					        	 
-					            writer.append(input+"\n");
-					         }
-					      }
-					      writer.flush();
-					      System.out.println("Contents added............");  
+//					      Scanner sc = new Scanner(new File(filePath));
+//					      Scanner sc = new Scanner(new File(file));
+//					      //Instantiating the FileWriter class
+//					      FileWriter writer = new FileWriter(mastertrainer);
+//					      //Instantiating the Set class
+//					      Set set = new HashSet();
+//					      while (sc.hasNextLine()) {
+//					         input = sc.nextLine();
+//					         if(set.add(input)) {
+//					        	 
+//					            writer.append(input+"\n");
+//					         }
+//					      }
+//					      writer.flush();
+//					      System.out.println("Contents added............");  
 					      
 	
 				try {
 					String line="";
-						String file=filePath;
 						
-						BufferedReader br=new BufferedReader(new FileReader(file));
-						
-						
-				//List<partipantDeatil> participDeatils=(List<partipantDeatil>) participantDao.findAll();
-			
-					
+						BufferedReader br = new BufferedReader(new FileReader(file));								
 						while((line=br.readLine())!=null) {
-								
-							
-								String [] data=line.split(",");
-								
-				
-								partipantDeatil participantDeatail=new partipantDeatil();
-								
-								
+								String[] data=line.split(",");
+								partipantDeatil participantDeatail=new partipantDeatil();	
 								participantDeatail.setFirstname(data[0]);
 								participantDeatail.setLastname(data[1]);
 								participantDeatail.setEmail(data[2]);
@@ -2020,7 +2005,7 @@ public class ControllerHealth
 					//participantDao.deleteByQuery();
 			
 			}
-								
+						br.close();		
 				
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
