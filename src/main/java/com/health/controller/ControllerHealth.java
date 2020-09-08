@@ -106,6 +106,8 @@ public class ControllerHealth {
 
 	public static String uploadQusetion = "src/main/resources/static" + "/Media/content" + "/Question";
 
+	public static String uploadCategoryLogo= "src/main/resources/static" + "/Media/content" + "/CategoryLogo";
+
 	public String pathfile = uploadDirectory;
 
 	@Autowired
@@ -220,12 +222,37 @@ public class ControllerHealth {
 			model.addAttribute("tutorialList", video);
 
 		}
+		System.err.println("******************************");
+
+		System.err.println(categoryname);
+		System.err.println(topicName);
+		System.err.println(inputLanguage);
+
+		System.err.println(categoryname.toString());
+		System.err.println(topicName.toString());
+		System.err.println(inputLanguage.toString());
+
+		System.err.println(categoryname.getClass());
+		System.err.println(topicName.getClass());
+		System.err.println(inputLanguage.getClass());
+
+		System.err.println("******************************");
 
 		model.addAttribute("list", tutorialRes);
 		List<Tutorial> list;
-		boolean categorySelect = categoryname!="0" ? true : false;
-		boolean topicSelect = topicName!="0" ? true : false;
-		boolean languageSelect = inputLanguage!="0" ? true : false;
+		boolean categorySelect = false;
+		if(category!=null) {
+			categorySelect = true;
+		}
+		boolean topicSelect = false;
+		if(topic!=null) {
+			topicSelect = true;
+		}
+		boolean languageSelect = false;
+		if(language!=null) {
+			languageSelect = true;
+		}
+
 		if(categorySelect & topicSelect & languageSelect) {
 			Tutorial tutorial = tutorialDao.findTutorialByCategoryTopicLang(category, topic,language);
 			int id = tutorial.getTutorialid();
@@ -1382,9 +1409,37 @@ public class ControllerHealth {
 
 	@RequestMapping(value = "/savecategory", method = RequestMethod.POST)
 	public String add(HttpServletRequest req, Model model, Authentication authentication,
-			@RequestParam(value = "checkboxName", required = false) String checkboxValue) {
+			@RequestParam(value = "checkboxName", required = false) String checkboxValue,
+			@RequestParam("uploadCategoryLogo") MultipartFile[] files) {
 
 		String categoryName = req.getParameter("categoryname");
+
+		String path = null;
+		String abc = uploadCategoryLogo ;
+		String folder = uploadCategoryLogo + "/" + categoryName;
+		new File(abc).mkdir();
+		new File(folder).mkdir();
+		String fileCategory="";
+		StringBuilder fileNames = new StringBuilder();
+		for (MultipartFile file : files) {
+			Path fileNameAndPath = Paths.get(abc, file.getOriginalFilename());
+			fileNames.append(file.getOriginalFilename() + " ");
+
+			try {
+				Files.write(fileNameAndPath, file.getBytes());
+
+				System.err.println("__________________________fileNameAndPath");
+
+				System.err.println("fileNameAndPath");
+				System.err.println("__________________________fileNameAndPath");
+
+				fileCategory = fileNameAndPath.toString();
+
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 
 		if (categoryDao.findBycategoryname(categoryName) != null) {
 			model.addAttribute("msg", true);
@@ -1399,11 +1454,13 @@ public class ControllerHealth {
 
 		String currentTime = sdf.format(dt);
 
+		String substring = fileCategory.substring(26);
 		Category category = new Category();
 
 		category.setCategoryname(categoryName);
 		category.setCreated(getCurrentTime());
 		category.setUserid(user.getId());
+		category.setUploadCategoryLogo(substring);
 
 		if (checkboxValue != null) {
 			category.setStatus(1);

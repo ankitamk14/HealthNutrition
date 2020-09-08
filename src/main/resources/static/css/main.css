@@ -466,6 +466,35 @@ footer .dev{
 }
 /* ---------------- status color ---------------- */
 
+
+.listVideoImg{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid blue;
+}
+.listTutorialContent{
+	
+}
+.listTutorialContent .title{
+	font-weight: bold;
+	color: #1C7871;
+}
+.listTutorialContent .category{
+	font-size: 14px!important;
+	color: rgba(0,0,0,0.9);
+}
+
+.listTutorialContent .desc{
+	font-size: 14px!important;
+	color: rgba(0,0,0,0.8);
+}
+.tutorialRow{
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.mdb-lightbox{
+	background: #fff;
+}
 /****************************************Contributor************************************************/
 
 /****************************************header************************************************/

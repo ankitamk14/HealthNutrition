@@ -1,14 +1,11 @@
 package com.health.model;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +27,14 @@ public class Category {
 	private String categoryname;
 	private int status;
 	private Timestamp created;
-	
+	private String uploadCategoryLogo;
+
+
+
+
+	public String getUploadCategoryLogo() {
+		return uploadCategoryLogo;
+	}
 
 	public Timestamp getCreated() {
 		return created;
@@ -61,22 +65,22 @@ public class Category {
 
 	  @OneToMany(mappedBy = "category",cascade =CascadeType.ALL) private
 	  List<Tutorial> tutorials;
-	  
+
 	  @OneToMany(mappedBy = "category",cascade =CascadeType.ALL) private
 	  List<contributor_Role> contributor_Roles;
 
-	  @OneToMany(mappedBy = "category",cascade =CascadeType.ALL) 
+	  @OneToMany(mappedBy = "category",cascade =CascadeType.ALL)
 	  private List<topic>  topic;
-	 
-	  @OneToMany(mappedBy = "category",cascade =CascadeType.ALL) 
+
+	  @OneToMany(mappedBy = "category",cascade =CascadeType.ALL)
 	  private List<commentOnComponent>  commentOnComponent;
-	  
-	  
-	  
+
+
+
 	  @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
 		 private List<TraningInformation> traningInformations;
-		 
-	  
+
+
 		public List<topic> getTopic() {
 			return topic;
 		}
@@ -84,7 +88,7 @@ public class Category {
 		public void setTopic(List<topic> topic) {
 			this.topic = topic;
 		}
-	 
+
 	public List<Tutorial> getTutorials() {
 		return tutorials;
 	}
@@ -107,6 +111,12 @@ public class Category {
 
 	public void setCategoryname(String categoryname) {
 		this.categoryname = categoryname;
+	}
+
+	public void setUploadCategoryLogo(String substring) {
+		// TODO Auto-generated method stub
+		this.uploadCategoryLogo = substring;
+
 	}
 
 }

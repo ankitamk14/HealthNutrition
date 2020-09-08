@@ -87,14 +87,58 @@
         </div>
 </section> -->
   <!-- Intro Text with carousel -->
+ <section>
+ <div class="container">
+ <div class="my-3">
+ <form th:action="@{/showListTutorial}" class="form-inline" style="width:100%;">
+ <div class="row px-6" style="width: 100%;">
+ <div class="col-md-3">
+ <label class="sr-only" for="inputState">Category</label>
+            <select class="custom-select d-block w-100" id="categoryname" name="categoryName">
+              <option value="">Select Category...</option>
+              <option th:each="category : ${categorys}"><span th:text="${category}">Title ...</span></option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid foss.
+            </div>
+ </div>
+  <div class="col-md-4">
+ <select class="custom-select d-block w-100" id="inputTopicName" name="topic">
+              <option value="">Select Topic</option>
+            </select>
+ </div>
+  <div class="col-md-3">
+ <select class="custom-select d-block w-100" id="inputLanguage" name="inputLanguage">
+              <option value="0">Select Language</option>
+              <!-- <option th:each="language : ${languages}"><span th:text="${language.languageName}">Title ...</span></option> -->
+            </select>
+            <div class="invalid-feedback">
+              Please provide a valid language.
+            </div>
+ </div>
+ <div class="col-md-2">
+ <button type="submit" class="btn btn-outline-info" style="height: 38px;width: 100px;margin:0;background:#1C7871;color: #fff;"> Submit </button>
+ </div>
+ 
+ 
+ 
+ </div>
+  
+ </form>
+ </div>
+ 
+ </div>
+ 
+ 
+ </section>
 <section id="intro" class="offset">
   <div class="row jumbotron p-4 p-md-5 text-white rounded">
     <div class="col-md-6 px-0 car-content">
     <div class="row" style="width:100%;">
 <form th:action="@{/showListTutorial}" class="form-inline" style="width:100%;">
-<div class="row" style="width:100%;">
+<!-- <div class="row" style="width:100%;">
 <div class="col-md-5 mb-3">
-            <!-- <label for="country">Topic</label> -->
+            <label for="country">Topic</label>
             <label class="sr-only" for="inputState">Category</label>
             <select class="custom-select d-block w-100" id="categoryname" name="categoryName">
               <option value="">Select Category...</option>
@@ -108,10 +152,10 @@
               <option value="">Select Topic</option>
             </select>
           <div class="col-md-4 mb-3">
-            <!-- <label for="state">Language</label> -->
+            <label for="state">Language</label>
             <select class="custom-select d-block w-100" id="inputLanguage" name="inputLanguage">
               <option value="0">Select Language</option>
-              <!-- <option th:each="language : ${languages}"><span th:text="${language.languageName}">Title ...</span></option> -->
+              <option th:each="language : ${languages}"><span th:text="${language.languageName}">Title ...</span></option>
             </select>
             <div class="invalid-feedback">
               Please provide a valid language.
@@ -122,7 +166,7 @@
           </div>
 
 
-</div>
+</div> -->
 
 						<!-- <div class="pad-extra">
 							<label class="sr-only" for="inputState">Category</label> 

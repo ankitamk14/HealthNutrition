@@ -27,13 +27,21 @@
 						</h5>
 						<h5 class="card-title text-center a-card-title">Add Category</h5>
 						<form class="form-horizontal" th:action="@{/savecategory}"
-							 method="post">
+							 method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="Category">Category</label> <input type="text"
 									class="form-control " id="Category" name="categoryname"
 									required="required" /> <span style="color: red;"
 									th:if="${statusOutline}">Catgory already exists. Choose
 									a different one.</span>
+							</div>
+							<div class="form-group">
+								<label for="categoryLogo" style="padding-top: 8px">Add
+									Logo</label> <input type="file" style="padding-right: 50px"
+									class="form-control-file" id="categoryLogo"
+									name="uploadCategoryLogo" placeholder="uploadFile"
+									accept=".jpg, .jpeg ,img,.png" required="required" />
+
 							</div>
 							<div class="form-group">
 								<label for="Category">Status</label> <input type="checkbox"

@@ -167,18 +167,28 @@
 		
 	<div class="container" style="padding-top: 50px">
 		
-	<span th:each="tutorial : ${list}">
+	<div th:each="tutorial : ${list}">
 	
-		<div class="row" style="padding-top: 65px">
+	<div class="row tutorialRow">
+	<div class="col-md-3 py-3 px-3" >
+		<a th:href="${'viewVideo/view/' + tutorial.getTutorialid()}">	
+				<img th:href="${'viewVideo/view/' + tutorial.getTutorialid()}" src="/image/Classes-And-Objects-Small.png"></img>
+		</a>
+	</div>
+	<div class="col-md-8 py-3 px-3 listTutorialContent" >
+		<p class="title" th:text="${tutorial.getTopic().getTopicname()}"></p>
+		<p class="category">Category : <span  th:text="${tutorial.getCategory().getCategoryname()}"></span> </p>
+		
+		<div class="desc" th:utext="${tutorial.getOutlin()}"></div>
+	</div>
+	</div>
+		<!-- <div class="row" style="padding-top: 65px">
 					
 				<div class="col-md-3">
 						
 		<a th:href="${'viewVideo/view/' + tutorial.getTutorialid()}">	
-			 
 				<img th:href="${'viewVideo/view/' + tutorial.getTutorialid()}" src="/image/Classes-And-Objects-Small.png"></img>
-					
-		</a>
-						
+		</a>		
 			   </div>
 								    
 			<div class="col-md-7" style="display: inline-block;">
@@ -191,9 +201,7 @@
 			<div class="row" >
 						
 					<h5>Category :</h5> &nbsp; <h5 style="color: blue; padding-right: 25px" th:text="${tutorial.getCategory().getCategoryname()}"></h5>
-						    
 			</div>
-				
 						<div class="row">
 									
 				<h6>Outline :</h6> &nbsp; 
@@ -203,8 +211,8 @@
 				
 			 	</div>
 				
-		 </div>
-		 </span> 
+		 </div> -->
+		 </div> 
 		 
 		 
 		</div>
